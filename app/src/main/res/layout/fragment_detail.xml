@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailFragment">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/movieDetailGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="imageViewDetail,imageViewDetailLanguage,imageViewDetailStudio,imageViewDetailVote,divider3,divider4,textViewDetail,textViewDetailLanguage,textViewDetailStudio,textViewDetailVote"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageViewDetail"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toStartOf="@+id/divider4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDetail" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/divider3"
+        app:layout_constraintTop_toTopOf="@+id/divider3" />
+
+    <ImageView
+        android:id="@+id/imageViewDetailVote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/textViewDetailVote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewDetailVote"
+        app:layout_constraintEnd_toStartOf="@+id/divider3"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDetailVote"
+        app:layout_constraintTop_toTopOf="@+id/imageViewDetailVote"
+        tools:text="4.5" />
+
+    <ImageView
+        android:id="@+id/imageViewDetailStudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_building"
+        app:layout_constraintBottom_toBottomOf="@+id/divider3"
+        app:layout_constraintStart_toEndOf="@+id/divider3"
+        app:layout_constraintTop_toTopOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/textViewDetailStudio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewDetailStudio"
+        app:layout_constraintEnd_toStartOf="@+id/divider4"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDetailStudio"
+        app:layout_constraintTop_toTopOf="@+id/imageViewDetailStudio"
+        tools:text="Universal Studio" />
+
+    <ImageView
+        android:id="@+id/imageViewDetailLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_language"
+        app:layout_constraintBottom_toBottomOf="@+id/divider4"
+        app:layout_constraintStart_toEndOf="@+id/divider4"
+        app:layout_constraintTop_toTopOf="@+id/divider4" />
+
+    <TextView
+        android:id="@+id/textViewDetailLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewDetailLanguage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDetailLanguage"
+        app:layout_constraintTop_toTopOf="@+id/imageViewDetailLanguage"
+        tools:text="English" />
+
+    <TextView
+        android:id="@+id/textViewDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDetail" />
+
+    <TextView
+        android:id="@+id/textViewErrorDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="An unknown error occurred"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
