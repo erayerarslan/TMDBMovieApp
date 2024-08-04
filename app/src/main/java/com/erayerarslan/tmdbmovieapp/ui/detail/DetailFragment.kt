@@ -33,12 +33,14 @@ class DetailFragment : Fragment() {
        _binding=FragmentDetailBinding.inflate(inflater,container,false)
 
         viewModel.getMovieDetail(movieId = args.movieId)
+
         observeEvents()
 
         return binding.root
     }
 
     private fun observeEvents(){
+
         viewModel.isLoading.observe(viewLifecycleOwner){
             binding.progressBar2.isVisible=it
         }
@@ -46,9 +48,12 @@ class DetailFragment : Fragment() {
             binding.textViewErrorDetail.text = it
             binding.textViewErrorDetail.isVisible = true
         }
+
         viewModel.movieResponse.observe(viewLifecycleOwner) { movie ->
+            val voteScore = String.format("%.1f", movie?.voteAverage)
+
             binding.imageViewDetail.loadImage(movie.backdropPath)
-            binding.textViewDetailVote.text = movie.voteAverage.toString()
+            binding.textViewDetailVote.text = voteScore
             binding.textViewDetailStudio.text=movie.productionCompanies?.firstOrNull()?.name
             binding.textViewDetailLanguage.text=movie.spokenLanguages?.firstOrNull()?.englishName
             binding.textViewDetail.text = movie.overview

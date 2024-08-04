@@ -16,3 +16,13 @@ interface ApiService {
 
     suspend fun  getMovieDetail(@Path("movie_id") movieId: String, @Header("Authorization") token: String) :Response<MovieDetailResponse>
 }
+
+//data class vs class farkı
+//retrofit dökümatasyonları okuyalım get,post,put bunların birbilerine olan değişikliker
+
+//path,body,request modellerine bakalım
+
+//yıldıza basınca toast mesaj çıkartmak ödev
+//yuvarlama işi 7.1 gibi ama fonksiyonla yazılacak
+
+//fotoğrafa uzun süre basılı tutunca toast mesajı yazılack

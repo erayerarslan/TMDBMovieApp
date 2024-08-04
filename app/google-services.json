@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318782700640",
+    "project_id": "tmdbmovie-bdb62",
+    "storage_bucket": "tmdbmovie-bdb62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318782700640:android:9dcb4d0703eaabba5f9705",
+        "android_client_info": {
+          "package_name": "com.erayerarslan.tmdbmovieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcpEb53NTV26a66P4RuePCmOFifdvX-4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

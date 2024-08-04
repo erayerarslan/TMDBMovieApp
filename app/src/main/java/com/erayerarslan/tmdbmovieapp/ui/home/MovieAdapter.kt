@@ -1,7 +1,10 @@
 package com.erayerarslan.tmdbmovieapp.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.erayerarslan.tmdbmovieapp.databinding.ItemHomeRecyclerViewBinding
 import com.erayerarslan.tmdbmovieapp.model.MovieItem
@@ -11,7 +14,11 @@ interface MovieClickListener{
     fun onMovieClicked(movieId: Int?)
 }
 
-class MovieAdapter(private val movieList: List<MovieItem?>,private val movieClickListener: MovieClickListener): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val movieList: List<MovieItem?>,
+                   private val movieClickListener: MovieClickListener,
+
+    )
+    : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     class ViewHolder(val binding:ItemHomeRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,17 +30,36 @@ class MovieAdapter(private val movieList: List<MovieItem?>,private val movieClic
         return movieList.size
     }
 
+    @SuppressLint("DefaultLocale")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieList[position]
+        //puanı yuvaladık ve bir değere atadık
+        val voteScore = String.format("%.1f", movie?.voteAverage)
+        val context = holder.binding.root.context
+        val movieTitle = movie?.title
+        holder.binding.apply {
+            this.textViewMovieTitle.text = movieTitle
+            this.textViewMovieOverview.text= movie?.overview
+            this.textViewMovieVote.text = voteScore
 
-        holder.binding.textViewMovieTitle.text = movie?.title
-        holder.binding.textViewMovieOverview.text= movie?.overview
-        holder.binding.textViewMovieVote.text = movie?.voteAverage.toString()
+            this.imageViewMovie.loadCircleImage(movie?.posterPath)
 
-        holder.binding.imageViewMovie.loadCircleImage(movie?.posterPath)
+            this.root.setOnClickListener {
+                movieClickListener.onMovieClicked(movieId = movie?.id)
+            }
 
-        holder.binding.root.setOnClickListener {
-            movieClickListener.onMovieClicked(movieId = movie?.id)
+
+            this.imageView2.setOnClickListener {
+                Toast.makeText(context, voteScore, Toast.LENGTH_SHORT).show()
+            }
+            this.imageViewMovie.setOnLongClickListener {
+                Toast.makeText(context, "$movieTitle filmini daha önce izlediniz mi?", Toast.LENGTH_SHORT).show()
+                true
+            }
+
         }
+
+
+
     }
 }
