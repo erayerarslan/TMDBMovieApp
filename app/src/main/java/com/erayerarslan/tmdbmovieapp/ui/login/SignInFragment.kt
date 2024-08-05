@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.erayerarslan.tmdbmovieapp.MainActivity
 import com.erayerarslan.tmdbmovieapp.R
 import com.erayerarslan.tmdbmovieapp.databinding.FragmentHomeBinding
 import com.erayerarslan.tmdbmovieapp.databinding.FragmentSignInBinding
@@ -59,7 +60,10 @@ class SignInFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Oturum açma doğrulandı
+
                     findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                    (activity as? MainActivity)?.showBottomNavigationView()
+
                 } else {
                     binding.textViewSignInError.text = "There is no such account or the information does not match.";
                     Toast.makeText(requireContext(), "There is no such account or the information does not match.", Toast.LENGTH_SHORT).show()
@@ -70,5 +74,6 @@ class SignInFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 }

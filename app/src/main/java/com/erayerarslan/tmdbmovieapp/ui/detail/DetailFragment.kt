@@ -39,6 +39,7 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
+
     private fun observeEvents(){
 
         viewModel.isLoading.observe(viewLifecycleOwner){
@@ -60,6 +61,7 @@ class DetailFragment : Fragment() {
             binding.movieDetailGroup.isVisible = true
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

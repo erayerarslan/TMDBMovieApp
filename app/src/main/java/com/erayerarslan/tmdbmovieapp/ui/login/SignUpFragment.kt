@@ -1,6 +1,8 @@
 package com.erayerarslan.tmdbmovieapp.ui.login
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,9 @@ import com.erayerarslan.tmdbmovieapp.R
 import com.erayerarslan.tmdbmovieapp.databinding.FragmentSignInBinding
 import com.erayerarslan.tmdbmovieapp.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class SignUpFragment : Fragment() {
@@ -33,7 +38,7 @@ class SignUpFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Kayıt butonu tıklama dinleyicisi
+
         binding.buttonSignUp.setOnClickListener {
             val email = binding.emailEt.text.toString().trim()
             val password = binding.passEt.text.toString().trim()
@@ -64,7 +69,7 @@ class SignUpFragment : Fragment() {
         }
 
         if (password.isEmpty()) {
-            binding.passEt.error = "Password required"
+            binding.passEt.error = "Password cannot be empty"
             binding.passEt.requestFocus()
             return false
         }
@@ -88,13 +93,21 @@ class SignUpFragment : Fragment() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Kayıt başarılı, kullanıcı ana ekrana yönlendirilebilir
-                    Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
-                    // Navigate to main screen or perform other actions
-                    findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+                    //kayıt başarılı olursa
+                    binding.textViewSignUpError.setTextColor(resources.getColor(R.color.green))
+                    binding.textViewSignUpError.text = "Registration successful";
+                    //yazı bir süre gözüksün diye loop koydum.
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+                        println("Bu kod 2 saniye sonra çalışacak")
+                    }, 2000)
+
+
+
                 } else {
-                    // Kayıt başarısız, hata mesajı göster
-                    Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                    //kayıt başarısız olursa mesela aynı mailden kayıt işlemi
+                    binding.textViewSignUpError.text = task.exception?.message ;
+
                 }
             }
     }

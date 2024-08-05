@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.erayerarslan.tmdbmovieapp.MainActivity
 import com.erayerarslan.tmdbmovieapp.R
 import com.erayerarslan.tmdbmovieapp.databinding.FragmentHomeBinding
 
@@ -28,7 +29,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
 
         viewModel.getMoviesList()
         observeEvents()
@@ -49,6 +53,7 @@ class HomeFragment : Fragment() {
                 binding.textViewHomeError.text = "There is any movie :("
                 binding.textViewHomeError.isVisible = true
             }else{
+
                 movieAdapter = MovieAdapter(list,object : MovieClickListener{
                     override fun onMovieClicked(movieId: Int?) {
                         movieId?.let {
@@ -61,6 +66,8 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
