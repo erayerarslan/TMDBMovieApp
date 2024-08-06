@@ -62,7 +62,7 @@ class SignInFragment : Fragment() {
                     // Oturum açma doğrulandı
 
                     findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-                    (activity as? MainActivity)?.showBottomNavigationView()
+
 
                 } else {
                     binding.textViewSignInError.text = "There is no such account or the information does not match.";

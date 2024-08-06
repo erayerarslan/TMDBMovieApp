@@ -30,6 +30,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        (activity as? MainActivity)?.showBottomNavigationView()
+
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 

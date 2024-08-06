@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("popular")
@@ -15,7 +16,14 @@ interface ApiService {
     @GET("{movie_id}")
 
     suspend fun  getMovieDetail(@Path("movie_id") movieId: String, @Header("Authorization") token: String) :Response<MovieDetailResponse>
+
+    @GET("popular")
+
+    suspend fun getMovieListFiltered(@Header("Authorization") token : String,
+                                     @Query("query") query: String?
+                                     ) : Response<MovieResponse>
 }
+
 
 //data class vs class farkı
 //retrofit dökümatasyonları okuyalım get,post,put bunların birbilerine olan değişikliker
