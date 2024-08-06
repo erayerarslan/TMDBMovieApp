@@ -9,15 +9,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("popular")
+    @GET("movie/popular")
 
     suspend fun getMovieList(@Header("Authorization") token : String) : Response<MovieResponse>
 
-    @GET("{movie_id}")
+    @GET("movie/{movie_id}")
 
     suspend fun  getMovieDetail(@Path("movie_id") movieId: String, @Header("Authorization") token: String) :Response<MovieDetailResponse>
 
-    @GET("popular")
+    @GET("search/movie")
 
     suspend fun getMovieListFiltered(@Header("Authorization") token : String,
                                      @Query("query") query: String?

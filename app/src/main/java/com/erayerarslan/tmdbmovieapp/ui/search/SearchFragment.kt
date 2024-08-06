@@ -47,7 +47,29 @@ class SearchFragment : Fragment() {
         viewModel.movieList.observe(viewLifecycleOwner) { list ->
             if (list.isNullOrEmpty()) {
 
-            }else {
+                binding.editTextSearch.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {}
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        val query = s.toString().trim()
+                        viewModel.fetchMovies(query)
+
+
+                    }
+                })
+            } else {
 
                 searchAdapter = SearchAdapter(list, object : MovieClickListener {
                     override fun onMovieClicked(movieId: Int?) {
@@ -61,24 +83,9 @@ class SearchFragment : Fragment() {
                 binding.SearchRecyclerView.adapter = searchAdapter
 
 
-                binding.editTextSearch.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {}
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        val query = s.toString().trim()
-                        viewModel.fetchMovies(query)
-
-
-                    }
-                })
-
             }
-
-
         }
     }
-
 
 
     override fun onDestroyView() {

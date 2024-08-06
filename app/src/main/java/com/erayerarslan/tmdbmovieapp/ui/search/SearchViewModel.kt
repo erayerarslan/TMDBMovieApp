@@ -14,27 +14,32 @@ class SearchViewModel :ViewModel(){
     val isLoading : MutableLiveData<Boolean> = MutableLiveData(false)
     val errorMessage : MutableLiveData<String?> = MutableLiveData()
 
-    fun fetchMovies(query: String? = null) {
+    fun fetchMovies(query: String?) {
         isLoading.value = true
         viewModelScope.launch {
             try {
+
                 // Query parametresi isteğe bağlıdır, null olabilir
+
                 val response = ApiClient.getClient().getMovieListFiltered(
                     token = Constants.BEARER_TOKEN,
                     query = query // Sorgu parametresi ekleniyor
                 )
 
+
                 if (response.isSuccessful) {
                     val movies = response.body()?.movieItems
-
+                    println("Movies: $movies")
                     if (!query.isNullOrEmpty()) {
                         val filteredMovies = movies?.filter {
                             it?.title!!.contains(query, ignoreCase = true)
-                        }
 
+                        }
+                        println(query+"2")
                         movieList.postValue(filteredMovies)
                     } else {
                         movieList.postValue(movies)
+                        println(query+"1")
                     }
                 } else {
                     errorMessage.value = response.message() ?: "Unknown Error"
